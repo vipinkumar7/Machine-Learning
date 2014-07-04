@@ -37,7 +37,7 @@ def create_dataset(flist):
     global numOfDocs
     i=0.0
     k=1
-    op=open("/home/karthik/Desktop/tfidf/dataset.txt","a")
+    op=open("./dataset.txt","a")
     op.seek(0)
     op.truncate()
     print "Creating dataset. Output file opened!"
@@ -65,7 +65,7 @@ def dcountgen():
         using the dataset created and stores it in docCount."""
     global dictionary
     global docCount
-    op=open("/home/karthik/Desktop/tfidf/dataset.txt","r")
+    op=open("./dataset.txt","r")
     for word in dictionary:
         count=0
         #print "Counting :"+word
@@ -86,7 +86,7 @@ def tfgen():
     """ This creates the term frequency count for all the words in a particular
         document by ingesting the dataset and storing the results in tfCount."""
     global tfCount
-    ip=open("/home/karthik/Desktop/tfidf/dataset.txt","r")
+    ip=open("./dataset.txt","r")
     #print "\n\nReading the dataset and genratinf tfvector:"
     for line in ip:
         tf=dict()
@@ -192,7 +192,7 @@ def interface(sentence):
 """ Now we start calling all the functions and developing the dictionaries
     to classify input text"""
 
-files={"/home/karthik/Desktop/tfidf/doc1.txt","/home/karthik/Desktop/tfidf/doc2.txt","/home/karthik/Desktop/tfidf/doc3.txt"}
+files={"./doc1.txt","./doc2.txt","./doc3.txt"}
 create_dataset(files)
 tfgen()
 dcountgen()
