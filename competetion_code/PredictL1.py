@@ -85,6 +85,10 @@ def main():
     
     y_pred=model.predict(X_test)
     #accuracy=accuracy_score(y_test,y_pred)
+    
+
+    acc=model.score(X_test,y_pred)
+    print(acc)    
     print("Mean squared error: %.2f"
       % mean_squared_error(y_test,y_pred))
     #print("Accuracy: %.2f%%" % (accuracy * 100.0))
