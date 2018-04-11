@@ -2,7 +2,7 @@
 """
 Created on Mon Jan 29 14:40:38 2018
 
-@author: root
+@author: Vipin Kumar
 """
 
 import numpy as np
@@ -12,6 +12,7 @@ from sklearn import  linear_model
 from sklearn.model_selection import train_test_split
 #from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_squared_error, r2_score
+from sklearn import preprocessing
 import hashlib
 
 def myfunc(x):
@@ -45,25 +46,23 @@ def myfunc1(x):
 def main():
     
     print("Loading data...")
-    
-    
     training_data = pd.read_csv('/home/vipin/Desktop/Invoice3.csv', header=0,delimiter="!")
- 
     np.random.seed(0)
-
-
     training_data['Division Desc']=training_data['Division Desc'].apply(lambda x: myfunc (x) if np.all(pd.notnull(x)) else myfunc("unknown") ) 
     training_data['Cost Centre Desc']=training_data['Cost Centre Desc'].apply(lambda x: myfunc (x) if np.all(pd.notnull(x)) else myfunc("unknown") )
     training_data['Nominal Desc']=training_data['Nominal Desc'].apply(lambda x: myfunc (x) if np.all(pd.notnull(x)) else myfunc("unknown"))
     training_data['Line Type']=training_data['Line Type'].apply(lambda x: myfunc (x) if np.all(pd.notnull(x)) else myfunc("unknown"))
     training_data['Dist Desc']=training_data['Dist Desc'].apply(lambda x: myfunc (x) if np.all(pd.notnull(x)) else myfunc("unknown"))
-    training_data['L1']=training_data['L1'].apply(lambda x: myfunc1 (x))
+    #training_data['L1']=training_data['L1'].apply(lambda x: myfunc1 (x))
 
 
     
     features=['Division Desc' ,'Cost Centre Desc' ,'Nominal Desc' ,'Line Type','Dist Desc']
+    label_encoder = preprocessing.LabelEncoder()
+
     target='L1'    
-    
+
+    unique_classes=training_data.unique()
     X = training_data[features]
     
     
@@ -81,8 +80,7 @@ def main():
     X_train,X_test,y_train,y_test=train_test_split(X,Y,test_size=test_size,random_state=seed)
     
     model.fit(X_train, y_train)
-   
-    
+
     y_pred=model.predict(X_test)
     #accuracy=accuracy_score(y_test,y_pred)
     
@@ -96,4 +94,3 @@ def main():
     print('Variance score: %.2f' % r2_score(y_test,y_pred))
 if __name__ == '__main__':
     main()
-    
