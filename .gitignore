@@ -1,3 +1,4 @@
 competetion_code/.idea/
 spend_classification/.idea/
 .DS_Store
+spend_classification/__pycache__/
